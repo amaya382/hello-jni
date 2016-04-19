@@ -1,0 +1,9 @@
+#!/bin/sh
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`
+scalac Interface.scala
+javah -jni Interface
+gcc -I/etc/alternatives/java_sdk/include -I/etc/alternatives/java_sdk/include/linux -shared -fPIC -o libImpl.so Impl.cpp
+scalac Main.scala
+scala Main
+
